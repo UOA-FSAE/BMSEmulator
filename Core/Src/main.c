@@ -48,6 +48,18 @@
 
 /* USER CODE BEGIN PV */
 
+// CAN
+uint32_t Tx_mailbox;
+
+CAN_TxHeaderTypeDef TxHeaderBmsDataPack0;
+CAN_TxHeaderTypeDef TxHeaderBmsDataPack1;
+CAN_TxHeaderTypeDef TxHeaderBmsDataPack2;
+CAN_TxHeaderTypeDef TxHeaderBmsDataPack3;
+CAN_TxHeaderTypeDef TxHeaderBmsDataPack4;
+
+CAN_TxHeaderTypeDef TxHeaderTemBMSBroadcast;
+CAN_TxHeaderTypeDef TxHeaderTemGenBroadcast;
+
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -165,6 +177,9 @@ void Error_Handler(void)
   /* USER CODE BEGIN Error_Handler_Debug */
   /* User can add his own implementation to report the HAL error return state */
   __disable_irq();
+
+  // Write fault pin high on error
+  HAL_GPIO_WritePin(FAULT_LED_GPIO_Port, FAULT_LED_Pin, GPIO_PIN_SET);
   while (1)
   {
   }

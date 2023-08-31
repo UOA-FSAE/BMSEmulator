@@ -57,8 +57,32 @@ void Error_Handler(void);
 /* USER CODE END EFP */
 
 /* Private defines -----------------------------------------------------------*/
-#define BOOT_CTRL_Pin GPIO_PIN_10
+#define MIN_CELL_VOLTAGE_Pin GPIO_PIN_0
+#define MIN_CELL_VOLTAGE_GPIO_Port GPIOA
+#define MAX_CELL_VOLTAGE_Pin GPIO_PIN_1
+#define MAX_CELL_VOLTAGE_GPIO_Port GPIOA
+#define MAX_TEMP_Pin GPIO_PIN_2
+#define MAX_TEMP_GPIO_Port GPIOA
+#define SPARE_ADC_Pin GPIO_PIN_3
+#define SPARE_ADC_GPIO_Port GPIOA
+#define BOOT_CTRL_Pin GPIO_PIN_4
 #define BOOT_CTRL_GPIO_Port GPIOA
+#define FAULT_LED_Pin GPIO_PIN_10
+#define FAULT_LED_GPIO_Port GPIOB
+#define CUSTOM_LED_Pin GPIO_PIN_11
+#define CUSTOM_LED_GPIO_Port GPIOB
+#define SPARE_TOGGLE_Pin GPIO_PIN_15
+#define SPARE_TOGGLE_GPIO_Port GPIOA
+#define CELL_COUNT_Pin GPIO_PIN_3
+#define CELL_COUNT_GPIO_Port GPIOB
+#define BMS_ACTIVE_Pin GPIO_PIN_4
+#define BMS_ACTIVE_GPIO_Port GPIOB
+#define TS_ACTIVE_Pin GPIO_PIN_5
+#define TS_ACTIVE_GPIO_Port GPIOB
+#define SPARE_EXTERNAL_2_Pin GPIO_PIN_6
+#define SPARE_EXTERNAL_2_GPIO_Port GPIOB
+#define SPARE_EXTERNAL_1_Pin GPIO_PIN_7
+#define SPARE_EXTERNAL_1_GPIO_Port GPIOB
 
 /* USER CODE BEGIN Private defines */
 
