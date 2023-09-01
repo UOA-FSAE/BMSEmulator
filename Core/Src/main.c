@@ -17,6 +17,7 @@
   */
 /* USER CODE END Header */
 /* Includes ------------------------------------------------------------------*/
+#include <emulatedBMSStatus.h>
 #include "main.h"
 #include "adc.h"
 #include "can.h"
@@ -26,7 +27,6 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -51,14 +51,19 @@
 // CAN
 uint32_t Tx_mailbox;
 
+CAN_TxHeaderTypeDef TxHeaderTSActive;
+
 CAN_TxHeaderTypeDef TxHeaderBmsDataPack0;
 CAN_TxHeaderTypeDef TxHeaderBmsDataPack1;
 CAN_TxHeaderTypeDef TxHeaderBmsDataPack2;
 CAN_TxHeaderTypeDef TxHeaderBmsDataPack3;
 CAN_TxHeaderTypeDef TxHeaderBmsDataPack4;
+CAN_TxHeaderTypeDef TxHeaderBmsDataPack5;
 
 CAN_TxHeaderTypeDef TxHeaderTemBMSBroadcast;
 CAN_TxHeaderTypeDef TxHeaderTemGenBroadcast;
+
+EmulatedBMSStatus bmsStatus;
 
 /* USER CODE END PV */
 
