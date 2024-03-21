@@ -58,6 +58,4 @@ typedef struct {
 	uint16_t PackCL;
 } EmulatedBMSStatus;
 
-
-
 #endif /* INC_EMULATEDBMSSTATUS_H_ */

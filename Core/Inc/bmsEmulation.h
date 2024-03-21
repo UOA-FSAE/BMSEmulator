@@ -12,5 +12,4 @@
 
 void SendCanFrames(HAL_TIM_ActiveChannel timChannel);
 
-
 #endif /* INC_BMSEMULATION_H_ */
