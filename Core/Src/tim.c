@@ -90,6 +90,10 @@ void MX_TIM2_Init(void)
     Error_Handler();
   }
   /* USER CODE BEGIN TIM2_Init 2 */
+	HAL_TIM_OC_Start_IT(&htim2,TIM_CHANNEL_1);
+	HAL_TIM_OC_Start_IT(&htim2,TIM_CHANNEL_2);
+	HAL_TIM_OC_Start_IT(&htim2,TIM_CHANNEL_3);
+	HAL_TIM_OC_Start_IT(&htim2,TIM_CHANNEL_4);
 
   /* USER CODE END TIM2_Init 2 */
 

@@ -17,7 +17,6 @@
   */
 /* USER CODE END Header */
 /* Includes ------------------------------------------------------------------*/
-#include <emulatedBMSStatus.h>
 #include "main.h"
 #include "adc.h"
 #include "can.h"
@@ -27,6 +26,7 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
+#include <emulatedBMSStatus.h>
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -64,7 +64,7 @@ CAN_TxHeaderTypeDef TxHeaderTemBMSBroadcast;
 CAN_TxHeaderTypeDef TxHeaderTemGenBroadcast;
 
 EmulatedBMSStatus bmsStatus;
-
+bool is_isr_active();
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -111,7 +111,9 @@ int main(void)
   MX_USB_PCD_Init();
   MX_TIM2_Init();
   /* USER CODE BEGIN 2 */
-
+  if (HAL_TIM_Base_Start_IT(&htim2) != HAL_OK) {
+ 	  Error_Handler();
+   }
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -190,7 +192,9 @@ void Error_Handler(void)
   }
   /* USER CODE END Error_Handler_Debug */
 }
-
+bool is_isr_active() {
+	return 0 != (SCB->ICSR & SCB_ICSR_VECTACTIVE_Msk);
+}
 #ifdef  USE_FULL_ASSERT
 /**
   * @brief  Reports the name of the source file and the source line number

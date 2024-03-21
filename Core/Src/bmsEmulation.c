@@ -43,7 +43,8 @@ void SendCanFrames(HAL_TIM_ActiveChannel timChannel) {
     	 TxData[3] = 0x00;
     	 TxData[4] = 0x00;
     	 TxData[5] = 0x00;
-    	 TxData[6] = 0x00;
+    	 TxData[6] = 0x48;
+    	 HAL_GPIO_TogglePin(FAULT_LED_GPIO_Port, FAULT_LED_Pin);
 
     	if (HAL_CAN_AddTxMessage(&hcan, &TxHeaderBmsDataPack5, TxData, &Tx_mailbox) != HAL_OK)
     				Error_Handler();
@@ -66,6 +67,7 @@ void SendCanFrames(HAL_TIM_ActiveChannel timChannel) {
 
     	 checksum = 0x00; // TODO
     	 TxData[7] = checksum;
+    	 HAL_GPIO_TogglePin(FAULT_LED_GPIO_Port, FAULT_LED_Pin);
     	if (HAL_CAN_AddTxMessage(&hcan, &TxHeaderBmsDataPack3, TxData, &Tx_mailbox) != HAL_OK)
     				Error_Handler();
 
@@ -76,7 +78,7 @@ void SendCanFrames(HAL_TIM_ActiveChannel timChannel) {
     	 TxData[3] = 0x00;
     	 TxData[4] = 0x00;
     	 TxData[5] = 0x00;
-    	 TxData[6] = 0x00;
+    	 TxData[6] = 0x56;
 
     	 checksum = 0x00; // TODO
     	 TxData[7] = checksum;
@@ -92,11 +94,12 @@ void SendCanFrames(HAL_TIM_ActiveChannel timChannel) {
     	 TxData[2] = 0x00;
     	 TxData[3] = 0x00;
     	 TxData[4] = 0x00;
-    	 TxData[5] = 0x00;
-    	 TxData[6] = 0x00;
+    	 TxData[5] = 0x01;
+    	 TxData[6] = 0x56;
 
     	 checksum = 0x00; // TODO
     	 TxData[7] = checksum;
+    	 HAL_GPIO_TogglePin(CUSTOM_LED_GPIO_Port, CUSTOM_LED_Pin);
     	if (HAL_CAN_AddTxMessage(&hcan, &TxHeaderBmsDataPack0, TxData, &Tx_mailbox) != HAL_OK)
     				Error_Handler();
 
@@ -106,8 +109,8 @@ void SendCanFrames(HAL_TIM_ActiveChannel timChannel) {
     	 TxData[2] = 0x00;
     	 TxData[3] = 0x00;
     	 TxData[4] = 0x00;
-    	 TxData[5] = 0x00;
-    	 TxData[6] = 0x00;
+    	 TxData[5] = 0x02;
+    	 TxData[6] = 0x56;
 
     	 checksum = 0x00; // TODO
     	 TxData[7] = checksum;
@@ -123,11 +126,12 @@ void SendCanFrames(HAL_TIM_ActiveChannel timChannel) {
     	 TxData[2] = 0x00;
     	 TxData[3] = 0x00;
     	 TxData[4] = 0x00;
-    	 TxData[5] = 0x00;
-    	 TxData[6] = 0x00;
+    	 TxData[5] = 0x01;
+    	 TxData[6] = 0x52;
 
     	 checksum = 0x00; // TODO
     	 TxData[7] = checksum;
+    	 HAL_GPIO_TogglePin(CUSTOM_LED_GPIO_Port, CUSTOM_LED_Pin);
     	if (HAL_CAN_AddTxMessage(&hcan, &TxHeaderBmsDataPack1, TxData, &Tx_mailbox) != HAL_OK)
     				Error_Handler();
     }
