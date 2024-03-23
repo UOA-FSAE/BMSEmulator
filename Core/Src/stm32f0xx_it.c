@@ -56,6 +56,7 @@
 
 /* External variables --------------------------------------------------------*/
 extern ADC_HandleTypeDef hadc;
+extern CAN_HandleTypeDef hcan;
 extern TIM_HandleTypeDef htim2;
 /* USER CODE BEGIN EV */
 
@@ -65,66 +66,72 @@ extern TIM_HandleTypeDef htim2;
 /*           Cortex-M0 Processor Interruption and Exception Handlers          */
 /******************************************************************************/
 /**
- * @brief This function handles Non maskable interrupt.
- */
-void NMI_Handler(void) {
-	/* USER CODE BEGIN NonMaskableInt_IRQn 0 */
+  * @brief This function handles Non maskable interrupt.
+  */
+void NMI_Handler(void)
+{
+  /* USER CODE BEGIN NonMaskableInt_IRQn 0 */
 
-	/* USER CODE END NonMaskableInt_IRQn 0 */
-	/* USER CODE BEGIN NonMaskableInt_IRQn 1 */
+  /* USER CODE END NonMaskableInt_IRQn 0 */
+  /* USER CODE BEGIN NonMaskableInt_IRQn 1 */
 	while (1) {
 	}
-	/* USER CODE END NonMaskableInt_IRQn 1 */
+  /* USER CODE END NonMaskableInt_IRQn 1 */
 }
 
 /**
- * @brief This function handles Hard fault interrupt.
- */
-void HardFault_Handler(void) {
-	/* USER CODE BEGIN HardFault_IRQn 0 */
+  * @brief This function handles Hard fault interrupt.
+  */
+void HardFault_Handler(void)
+{
+  /* USER CODE BEGIN HardFault_IRQn 0 */
 
-	/* USER CODE END HardFault_IRQn 0 */
-	while (1) {
-		/* USER CODE BEGIN W1_HardFault_IRQn 0 */
-		/* USER CODE END W1_HardFault_IRQn 0 */
-	}
+  /* USER CODE END HardFault_IRQn 0 */
+  while (1)
+  {
+    /* USER CODE BEGIN W1_HardFault_IRQn 0 */
+    /* USER CODE END W1_HardFault_IRQn 0 */
+  }
 }
 
 /**
- * @brief This function handles System service call via SWI instruction.
- */
-void SVC_Handler(void) {
-	/* USER CODE BEGIN SVC_IRQn 0 */
+  * @brief This function handles System service call via SWI instruction.
+  */
+void SVC_Handler(void)
+{
+  /* USER CODE BEGIN SVC_IRQn 0 */
 
-	/* USER CODE END SVC_IRQn 0 */
-	/* USER CODE BEGIN SVC_IRQn 1 */
+  /* USER CODE END SVC_IRQn 0 */
+  /* USER CODE BEGIN SVC_IRQn 1 */
 
-	/* USER CODE END SVC_IRQn 1 */
+  /* USER CODE END SVC_IRQn 1 */
 }
 
 /**
- * @brief This function handles Pendable request for system service.
- */
-void PendSV_Handler(void) {
-	/* USER CODE BEGIN PendSV_IRQn 0 */
+  * @brief This function handles Pendable request for system service.
+  */
+void PendSV_Handler(void)
+{
+  /* USER CODE BEGIN PendSV_IRQn 0 */
 
-	/* USER CODE END PendSV_IRQn 0 */
-	/* USER CODE BEGIN PendSV_IRQn 1 */
+  /* USER CODE END PendSV_IRQn 0 */
+  /* USER CODE BEGIN PendSV_IRQn 1 */
 
-	/* USER CODE END PendSV_IRQn 1 */
+  /* USER CODE END PendSV_IRQn 1 */
 }
 
 /**
- * @brief This function handles System tick timer.
- */
-void SysTick_Handler(void) {
-	/* USER CODE BEGIN SysTick_IRQn 0 */
+  * @brief This function handles System tick timer.
+  */
+void SysTick_Handler(void)
+{
+  /* USER CODE BEGIN SysTick_IRQn 0 */
 
-	/* USER CODE END SysTick_IRQn 0 */
-	HAL_IncTick();
-	/* USER CODE BEGIN SysTick_IRQn 1 */
+  /* USER CODE END SysTick_IRQn 0 */
+  HAL_IncTick();
+  /* USER CODE BEGIN SysTick_IRQn 1 */
 
-	/* USER CODE END SysTick_IRQn 1 */
+  /* USER CODE END SysTick_IRQn 1 */
 }
 
 /******************************************************************************/
@@ -135,29 +142,45 @@ void SysTick_Handler(void) {
 /******************************************************************************/
 
 /**
- * @brief This function handles ADC interrupt.
- */
-void ADC1_IRQHandler(void) {
-	/* USER CODE BEGIN ADC1_IRQn 0 */
+  * @brief This function handles ADC interrupt.
+  */
+void ADC1_IRQHandler(void)
+{
+  /* USER CODE BEGIN ADC1_IRQn 0 */
 
-	/* USER CODE END ADC1_IRQn 0 */
-	HAL_ADC_IRQHandler(&hadc);
-	/* USER CODE BEGIN ADC1_IRQn 1 */
+  /* USER CODE END ADC1_IRQn 0 */
+  HAL_ADC_IRQHandler(&hadc);
+  /* USER CODE BEGIN ADC1_IRQn 1 */
 
-	/* USER CODE END ADC1_IRQn 1 */
+  /* USER CODE END ADC1_IRQn 1 */
 }
 
 /**
- * @brief This function handles TIM2 global interrupt.
- */
-void TIM2_IRQHandler(void) {
-	/* USER CODE BEGIN TIM2_IRQn 0 */
+  * @brief This function handles TIM2 global interrupt.
+  */
+void TIM2_IRQHandler(void)
+{
+  /* USER CODE BEGIN TIM2_IRQn 0 */
 
-	/* USER CODE END TIM2_IRQn 0 */
-	HAL_TIM_IRQHandler(&htim2);
-	/* USER CODE BEGIN TIM2_IRQn 1 */
+  /* USER CODE END TIM2_IRQn 0 */
+  HAL_TIM_IRQHandler(&htim2);
+  /* USER CODE BEGIN TIM2_IRQn 1 */
 
-	/* USER CODE END TIM2_IRQn 1 */
+  /* USER CODE END TIM2_IRQn 1 */
+}
+
+/**
+  * @brief This function handles HDMI-CEC and CAN global interrupts / HDMI-CEC wake-up interrupt through EXTI line 27.
+  */
+void CEC_CAN_IRQHandler(void)
+{
+  /* USER CODE BEGIN CEC_CAN_IRQn 0 */
+
+  /* USER CODE END CEC_CAN_IRQn 0 */
+  HAL_CAN_IRQHandler(&hcan);
+  /* USER CODE BEGIN CEC_CAN_IRQn 1 */
+
+  /* USER CODE END CEC_CAN_IRQn 1 */
 }
 
 /* USER CODE BEGIN 1 */

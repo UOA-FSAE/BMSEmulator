@@ -13,13 +13,13 @@
 
 typedef struct {
 
-	// Inputs from ADC
+	// Inputs from Switches
 	bool tsActive;
 	bool bmsActive;
 	bool cellCount;
 	bool spareToggle;
 
-	// Inputs from Switches
+	// Inputs from ADC
 	uint16_t maxCellVoltage;
 	uint16_t minCellVoltage;
 	uint16_t maxTemp;
