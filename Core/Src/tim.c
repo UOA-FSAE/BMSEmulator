@@ -114,8 +114,6 @@ void HAL_TIM_Base_MspDeInit(TIM_HandleTypeDef* tim_baseHandle)
 // Gets called whenever there's an overflow I think
 void HAL_TIM_PeriodElapsedCallback (TIM_HandleTypeDef *htim) {
 	timerCounter++;
-	if (timerCounter > 19)
-		timerCounter = 1;
 	SendCanFrames(timerCounter*8);
 }
 /* USER CODE END 1 */

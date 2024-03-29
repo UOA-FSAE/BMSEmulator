@@ -55,29 +55,15 @@ void SendCanFrames(uint16_t timeElapsed) {
 		TxData[7] = 0x00;
 
 
-		while (HAL_CAN_GetTxMailboxesFreeLevel(&hcan) == 0) {
+		while (HAL_CAN_GetTxMailboxesFreeLevel(&hcan) <= 1) {
 			// wait for free mailbox
 		}
 		if (HAL_CAN_AddTxMessage(&hcan, &TxHeaderBmsDataPack5, TxData, &Tx_mailbox) != HAL_OK)
 			Error_Handler();
 
-		// Send Motec Keepalive - 0x100
-		TxData[0] = 0x01; // Keepalive
-		TxData[1] = 0x00;
-		TxData[2] = 0x00;
-		TxData[3] = 0x00;
-		TxData[4] = 0x00;
-		TxData[5] = 0x00;
-		TxData[6] = 0x00;
-		TxData[7] = 0x00;
+	}
 
-
-		while (HAL_CAN_GetTxMailboxesFreeLevel(&hcan) == 0) {
-			// wait for free mailbox
-		}
-		if (HAL_CAN_AddTxMessage(&hcan, &TxHeaderMotecKeepalive, TxData, &Tx_mailbox) != HAL_OK)
-			Error_Handler();
-	} else if (timeElapsed % 56 == 0) {
+	if (timeElapsed % 56 == 0) {
 		// Send 56ms period CAN Frames
 
 		// Send Data Pack 3 - Cell Voltages - 0x6B3
@@ -95,11 +81,34 @@ void SendCanFrames(uint16_t timeElapsed) {
 		TxData[6] = bmsStatus.NumCells;
 
 		TxData[7] = calculateChecksum(TxHeaderBmsDataPack3.StdId, TxData);
-		while (HAL_CAN_GetTxMailboxesFreeLevel(&hcan) == 0) {
+		while (HAL_CAN_GetTxMailboxesFreeLevel(&hcan) <= 1) {
 			// wait for free mailbox
 		}
 		if (HAL_CAN_AddTxMessage(&hcan, &TxHeaderBmsDataPack3, TxData, &Tx_mailbox) != HAL_OK)
 			Error_Handler();
+
+
+
+		// Send Motec Keepalive - 0x100
+		TxData[0] = 0x01; // Keepalive
+		TxData[1] = 0x00;
+		TxData[2] = 0x00;
+		TxData[3] = 0x00;
+		TxData[4] = 0x00;
+		TxData[5] = 0x00;
+		TxData[6] = 0x00;
+		TxData[7] = 0x00;
+
+
+		while (HAL_CAN_GetTxMailboxesFreeLevel(&hcan) <= 1) {
+			// wait for free mailbox
+		}
+
+		if (HAL_CAN_AddTxMessage(&hcan, &TxHeaderMotecKeepalive, TxData, &Tx_mailbox) != HAL_OK)
+			Error_Handler();
+
+
+
 
 		// Send Data Pack 4 - Pack Temperature - 0x6B4
 		TxData[0] = bmsStatus.HighTemperature >> 8; // High Temp H
@@ -111,12 +120,14 @@ void SendCanFrames(uint16_t timeElapsed) {
 		TxData[6] = 0x00; // Blank
 
 		TxData[7] = calculateChecksum(TxHeaderBmsDataPack4.StdId, TxData);
-		while (HAL_CAN_GetTxMailboxesFreeLevel(&hcan) == 0) {
+		while (HAL_CAN_GetTxMailboxesFreeLevel(&hcan) <= 1) {
 			// wait for free mailbox
 		}
 		if (HAL_CAN_AddTxMessage(&hcan, &TxHeaderBmsDataPack4, TxData, &Tx_mailbox) != HAL_OK)
 			Error_Handler();
-	} else if (timeElapsed % 104 == 0) {
+	}
+
+	if (timeElapsed % 104 == 0) {
 		// Send 104ms period CAN Frames
 
 		// Send Data Pack 0 - Pack State 1 - 0x6B0
@@ -130,7 +141,7 @@ void SendCanFrames(uint16_t timeElapsed) {
 
 		TxData[7] = calculateChecksum(TxHeaderBmsDataPack0.StdId, TxData);
 
-		while (HAL_CAN_GetTxMailboxesFreeLevel(&hcan) == 0) {
+		while (HAL_CAN_GetTxMailboxesFreeLevel(&hcan) <= 1) {
 			// wait for free mailbox
 		}
 		if (HAL_CAN_AddTxMessage(&hcan, &TxHeaderBmsDataPack0, TxData, &Tx_mailbox) != HAL_OK)
@@ -147,12 +158,13 @@ void SendCanFrames(uint16_t timeElapsed) {
 
 		TxData[7] = calculateChecksum(TxHeaderBmsDataPack2.StdId, TxData);
 
-		while (HAL_CAN_GetTxMailboxesFreeLevel(&hcan) == 0) {
+		while (HAL_CAN_GetTxMailboxesFreeLevel(&hcan) <= 1) {
 			// wait for free mailbox
 		}
 		if (HAL_CAN_AddTxMessage(&hcan, &TxHeaderBmsDataPack2, TxData, &Tx_mailbox) != HAL_OK)
 			Error_Handler();
-	} else if (timeElapsed % 152 == 0) {
+	}
+	if (timeElapsed % 152 == 0) {
 		// Send 152ms period CAN Frame
 
 		// Send Data Pack 1 - Pack State 2
@@ -167,7 +179,7 @@ void SendCanFrames(uint16_t timeElapsed) {
 
 		TxData[7] = calculateChecksum(TxHeaderBmsDataPack1.StdId, TxData);
 
-		while (HAL_CAN_GetTxMailboxesFreeLevel(&hcan) == 0) {
+		while (HAL_CAN_GetTxMailboxesFreeLevel(&hcan) <= 1) {
 			// wait for free mailbox
 		}
 		if (HAL_CAN_AddTxMessage(&hcan, &TxHeaderBmsDataPack1, TxData, &Tx_mailbox) != HAL_OK)

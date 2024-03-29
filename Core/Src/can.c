@@ -84,11 +84,11 @@ void MX_CAN_Init(void)
 	TxHeaderBmsDataPack5.TransmitGlobalTime = DISABLE;
 
 	// Motec Keepalive
-	TxHeaderBmsDataPack2.StdId = 0x100;
-	TxHeaderBmsDataPack2.DLC = 8;
-	TxHeaderBmsDataPack2.RTR = CAN_RTR_DATA;
-	TxHeaderBmsDataPack2.IDE = CAN_ID_STD;
-	TxHeaderBmsDataPack2.TransmitGlobalTime = DISABLE;
+	TxHeaderMotecKeepalive.StdId = 0x100;
+	TxHeaderMotecKeepalive.DLC = 8;
+	TxHeaderMotecKeepalive.RTR = CAN_RTR_DATA;
+	TxHeaderMotecKeepalive.IDE = CAN_ID_STD;
+	TxHeaderMotecKeepalive.TransmitGlobalTime = DISABLE;
 
 	// TEM BMS Broadcast
 //	TxHeaderTemBMSBroadcast.StdId = 0x1838F380;
