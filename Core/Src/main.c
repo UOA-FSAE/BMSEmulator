@@ -59,6 +59,7 @@ CAN_TxHeaderTypeDef TxHeaderBmsDataPack2;
 CAN_TxHeaderTypeDef TxHeaderBmsDataPack3;
 CAN_TxHeaderTypeDef TxHeaderBmsDataPack4;
 CAN_TxHeaderTypeDef TxHeaderBmsDataPack5;
+CAN_TxHeaderTypeDef TxHeaderMotecKeepalive;
 
 CAN_TxHeaderTypeDef TxHeaderTemBMSBroadcast;
 CAN_TxHeaderTypeDef TxHeaderTemGenBroadcast;

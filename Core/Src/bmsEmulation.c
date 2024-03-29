@@ -21,6 +21,8 @@ extern CAN_TxHeaderTypeDef TxHeaderBmsDataPack3;
 extern CAN_TxHeaderTypeDef TxHeaderBmsDataPack4;
 extern CAN_TxHeaderTypeDef TxHeaderBmsDataPack5;
 
+extern CAN_TxHeaderTypeDef TxHeaderMotecKeepalive;
+
 extern CAN_TxHeaderTypeDef TxHeaderTemBMSBroadcast;
 extern CAN_TxHeaderTypeDef TxHeaderTemGenBroadcast;
 
@@ -38,7 +40,6 @@ uint8_t calculateChecksum(uint16_t canID, uint8_t FrameData[8]) {
 
 void SendCanFrames(uint16_t timeElapsed) {
 	uint8_t TxData[8];
-	uint8_t checksum;
 	HAL_GPIO_WritePin(CUSTOM_LED_GPIO_Port, CUSTOM_LED_Pin, GPIO_PIN_SET);
 	if (timeElapsed % 48 == 0) {
 		// Send 48ms period CAN Frame
@@ -51,12 +52,30 @@ void SendCanFrames(uint16_t timeElapsed) {
 		TxData[4] = bmsStatus.MaximumCellVoltage & 0xFF;
 		TxData[5] = 0x00; // Pack CCL H
 		TxData[6] = 0x00; // Pack CCL L
+		TxData[7] = 0x00;
 
 
 		while (HAL_CAN_GetTxMailboxesFreeLevel(&hcan) == 0) {
 			// wait for free mailbox
 		}
 		if (HAL_CAN_AddTxMessage(&hcan, &TxHeaderBmsDataPack5, TxData, &Tx_mailbox) != HAL_OK)
+			Error_Handler();
+
+		// Send Motec Keepalive - 0x100
+		TxData[0] = 0x01; // Keepalive
+		TxData[1] = 0x00;
+		TxData[2] = 0x00;
+		TxData[3] = 0x00;
+		TxData[4] = 0x00;
+		TxData[5] = 0x00;
+		TxData[6] = 0x00;
+		TxData[7] = 0x00;
+
+
+		while (HAL_CAN_GetTxMailboxesFreeLevel(&hcan) == 0) {
+			// wait for free mailbox
+		}
+		if (HAL_CAN_AddTxMessage(&hcan, &TxHeaderMotecKeepalive, TxData, &Tx_mailbox) != HAL_OK)
 			Error_Handler();
 	} else if (timeElapsed % 56 == 0) {
 		// Send 56ms period CAN Frames

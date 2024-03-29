@@ -28,6 +28,8 @@ extern CAN_TxHeaderTypeDef TxHeaderBmsDataPack3;
 extern CAN_TxHeaderTypeDef TxHeaderBmsDataPack4;
 extern CAN_TxHeaderTypeDef TxHeaderBmsDataPack5;
 
+extern CAN_TxHeaderTypeDef TxHeaderMotecKeepalive;
+
 extern CAN_TxHeaderTypeDef TxHeaderTemBMSBroadcast;
 extern CAN_TxHeaderTypeDef TxHeaderTemGenBroadcast;
 /* USER CODE END 0 */
@@ -80,6 +82,13 @@ void MX_CAN_Init(void)
 	TxHeaderBmsDataPack5.RTR = CAN_RTR_DATA;
 	TxHeaderBmsDataPack5.IDE = CAN_ID_STD;
 	TxHeaderBmsDataPack5.TransmitGlobalTime = DISABLE;
+
+	// Motec Keepalive
+	TxHeaderBmsDataPack2.StdId = 0x100;
+	TxHeaderBmsDataPack2.DLC = 8;
+	TxHeaderBmsDataPack2.RTR = CAN_RTR_DATA;
+	TxHeaderBmsDataPack2.IDE = CAN_ID_STD;
+	TxHeaderBmsDataPack2.TransmitGlobalTime = DISABLE;
 
 	// TEM BMS Broadcast
 //	TxHeaderTemBMSBroadcast.StdId = 0x1838F380;
