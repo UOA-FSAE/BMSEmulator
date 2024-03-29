@@ -92,7 +92,7 @@ int main(void)
   bmsStatus.LowTemperature = 23;
   bmsStatus.HighTemperature = 30;
 
-  bmsStatus.cellCount = 120;
+  bmsStatus.NumCells = 120;
   /* USER CODE END 1 */
 
   /* MCU Configuration--------------------------------------------------------*/

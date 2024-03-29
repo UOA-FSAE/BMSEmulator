@@ -26,6 +26,16 @@ extern CAN_TxHeaderTypeDef TxHeaderTemGenBroadcast;
 
 extern EmulatedBMSStatus bmsStatus;
 
+uint8_t calculateChecksum(uint16_t canID, uint8_t FrameData[8]) {
+	uint32_t checksum = canID + 8;
+	for (uint8_t i = 0; i < 7; i++) {
+		checksum += FrameData[i];
+	}
+	checksum &= 0xFF;
+	return checksum;
+
+}
+
 void SendCanFrames(uint16_t timeElapsed) {
 	uint8_t TxData[8];
 	uint8_t checksum;
@@ -63,10 +73,9 @@ void SendCanFrames(uint16_t timeElapsed) {
 		TxData[4] = (bmsStatus.minCellVoltage >> 8) & 0xFF;
 		TxData[5] = bmsStatus.minCellVoltage & 0xFF;
 
-		TxData[6] = bmsStatus.cellCount;
+		TxData[6] = bmsStatus.NumCells;
 
-		checksum = 0xF0; // TODO
-		TxData[7] = checksum;
+		TxData[7] = calculateChecksum(TxHeaderBmsDataPack3.StdId, TxData);
 		while (HAL_CAN_GetTxMailboxesFreeLevel(&hcan) == 0) {
 			// wait for free mailbox
 		}
@@ -82,8 +91,7 @@ void SendCanFrames(uint16_t timeElapsed) {
 		TxData[5] = bmsStatus.LowTemperature & 0xFF; // Low Temp L
 		TxData[6] = 0x00; // Blank
 
-		checksum = 0x00; // TODO
-		TxData[7] = checksum;
+		TxData[7] = calculateChecksum(TxHeaderBmsDataPack4.StdId, TxData);
 		while (HAL_CAN_GetTxMailboxesFreeLevel(&hcan) == 0) {
 			// wait for free mailbox
 		}
@@ -101,8 +109,7 @@ void SendCanFrames(uint16_t timeElapsed) {
 		TxData[5] = 0x00; // Pack SOC L
 		TxData[6] = 0x00;
 
-		checksum = 0x00; // TODO
-		TxData[7] = checksum;
+		TxData[7] = calculateChecksum(TxHeaderBmsDataPack0.StdId, TxData);
 
 		while (HAL_CAN_GetTxMailboxesFreeLevel(&hcan) == 0) {
 			// wait for free mailbox
@@ -119,8 +126,7 @@ void SendCanFrames(uint16_t timeElapsed) {
 		TxData[5] = 0x00;
 		TxData[6] = 0x00;
 
-		checksum = 0x00; // TODO
-		TxData[7] = checksum;
+		TxData[7] = calculateChecksum(TxHeaderBmsDataPack2.StdId, TxData);
 
 		while (HAL_CAN_GetTxMailboxesFreeLevel(&hcan) == 0) {
 			// wait for free mailbox
@@ -138,11 +144,9 @@ void SendCanFrames(uint16_t timeElapsed) {
 		TxData[4] = 0x00;
 		TxData[5] = 0x00;
 		TxData[6] = bmsStatus.RollingCounter;
-
 		bmsStatus.RollingCounter++; // Increment counter
 
-		checksum = 0x00; // TODO
-		TxData[7] = checksum;
+		TxData[7] = calculateChecksum(TxHeaderBmsDataPack1.StdId, TxData);
 
 		while (HAL_CAN_GetTxMailboxesFreeLevel(&hcan) == 0) {
 			// wait for free mailbox

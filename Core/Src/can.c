@@ -118,16 +118,10 @@ void MX_CAN_Init(void)
   }
   /* USER CODE BEGIN CAN_Init 2 */
 
-	if (HAL_CAN_Start(&hcan) != HAL_OK) {
-		/* Start Error */
-		Error_Handler();
-	}
-
-	if (HAL_CAN_ActivateNotification(&hcan, CAN_IT_RX_FIFO0_MSG_PENDING) != HAL_OK)
-		{
-		  /* Notification Error */
-		  Error_Handler();
-		}
+  if (HAL_CAN_Start(&hcan) != HAL_OK) {
+	/* Start Error */
+	Error_Handler();
+  }
   /* USER CODE END CAN_Init 2 */
 
 }
@@ -156,9 +150,6 @@ void HAL_CAN_MspInit(CAN_HandleTypeDef* canHandle)
     GPIO_InitStruct.Alternate = GPIO_AF4_CAN;
     HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
 
-    /* CAN interrupt Init */
-    HAL_NVIC_SetPriority(CEC_CAN_IRQn, 0, 0);
-    HAL_NVIC_EnableIRQ(CEC_CAN_IRQn);
   /* USER CODE BEGIN CAN_MspInit 1 */
 
   /* USER CODE END CAN_MspInit 1 */
@@ -182,8 +173,6 @@ void HAL_CAN_MspDeInit(CAN_HandleTypeDef* canHandle)
     */
     HAL_GPIO_DeInit(GPIOB, GPIO_PIN_8|GPIO_PIN_9);
 
-    /* CAN interrupt Deinit */
-    HAL_NVIC_DisableIRQ(CEC_CAN_IRQn);
   /* USER CODE BEGIN CAN_MspDeInit 1 */
 
   /* USER CODE END CAN_MspDeInit 1 */

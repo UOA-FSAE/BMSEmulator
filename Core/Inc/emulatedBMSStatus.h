@@ -40,6 +40,7 @@ typedef struct {
 	uint8_t PackAmphours;
 	uint8_t PackDOD;
 	uint8_t PackHealth;
+	uint8_t NumCells;
 
 	// Cell Voltages
 	uint16_t HighCellVoltage;
