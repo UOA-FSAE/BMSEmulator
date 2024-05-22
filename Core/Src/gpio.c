@@ -83,7 +83,11 @@ void MX_GPIO_Init(void)
   /*Configure GPIO pin : PtPin */
   GPIO_InitStruct.Pin = TS_ACTIVE_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
+<<<<<<< HEAD
   GPIO_InitStruct.Pull = GPIO_PULLDOWN;
+=======
+  GPIO_InitStruct.Pull = GPIO_PULLUP;
+>>>>>>> 682b16534f82511023ab72319f929f87557cb672
   HAL_GPIO_Init(TS_ACTIVE_GPIO_Port, &GPIO_InitStruct);
 
 }
