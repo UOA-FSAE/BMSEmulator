@@ -89,6 +89,7 @@ int main(void)
   bmsStatus.maxCellVoltage = 40000; // 4V
   bmsStatus.AvgCellVoltage = 40000; // 4V
   bmsStatus.minCellVoltage = 40000; // 4V
+  bmsStatus.RollingCounter = 123;
 
   bmsStatus.LowTemperature = 23;
   bmsStatus.HighTemperature = 30;

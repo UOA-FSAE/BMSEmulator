@@ -90,11 +90,7 @@ void SendCanFrames(uint16_t timeElapsed) {
 
 
 		// Send Motec Keepalive - 0x100
-<<<<<<< HEAD
-		TxData[0] = HAL_GPIO_ReadPin(TS_ACTIVE_GPIO_Port, TS_ACTIVE_Pin); // Keepalive
-=======
 		TxData[0] = !HAL_GPIO_ReadPin(TS_ACTIVE_GPIO_Port, TS_ACTIVE_Pin); // Keepalive
->>>>>>> 682b16534f82511023ab72319f929f87557cb672
 		TxData[1] = 0x00;
 		TxData[2] = 0x00;
 		TxData[3] = 0x00;
